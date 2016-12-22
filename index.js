@@ -22,6 +22,11 @@ var stack = [];
 function mount(app) {
   var r = arguments[1] || routes;
   var pre = arguments[2] || '';
+  if(pre.startsWith("/")) {
+    pre = pre.slice(1);
+  }
+
+
   // console.log(r)
   // console.log(pre)
   // console.log(app)
@@ -33,6 +38,9 @@ function mount(app) {
       console.log('mount route ' + file + " ");
       if(k === 'index') {
         path = '/'+ pre;
+        if(path.endsWith("/")) {
+          path = path.slice(0, path.length -1 );
+        }
         // console.log('sang path= ' + path);
         // console.log('sang k= ' + r[k]);
         _use(koa, file, path, r[k]);
