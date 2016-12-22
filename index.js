@@ -22,6 +22,10 @@ var stack = [];
 function mount(app) {
   var r = arguments[1] || routes;
   var pre = arguments[2] || '';
+  if(pre.startsWith("/")) {
+    pre = pre.slice(1);
+  }
+
   // console.log(r)
   // console.log(pre)
   // console.log(app)
@@ -35,6 +39,10 @@ function mount(app) {
         path = '/'+ pre;
         // console.log('sang path= ' + path);
         // console.log('sang k= ' + r[k]);
+        if(path.endsWith("/")) {
+          path = path.slice(0, path.length -1 );
+        }
+
         _use(koa, file, path, r[k]);
       }else{
         // console.log('this is a obj');
